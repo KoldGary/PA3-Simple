@@ -15,4 +15,13 @@ token NUM '\d+'
 <num> ::= <NUM>
 %
 # Semantic specification
-# Students will implement the minimum-value semantics here
+Program.min = nums.min
+
+NumList.min = min(num.val, rest.min)
+
+MoreNums.min = nums.min
+
+Empty.min = float('inf')   # identity for min
+
+num.val = int(NUM.text)
+

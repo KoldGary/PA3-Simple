@@ -3,14 +3,24 @@
 
 skip WHITESPACE '\s+'
 token NL '\n'
-# Students will add ZERO and ONE tokens here
+token ZERO '\Zero'
+token ONE '\ONE'
+
+# Lexical specification
+token ZERO '0'
+token ONE '1'
+skip WHITESPACE '\s+'
 
 %
 # Syntactic specification
 <binary> ::= <bits>
-<bits> **= <bit>
-# Students will add <bit> rules here (e.g., <bit>:ZeroBit ::= ZERO)
+<bits> ::= <bit> <bits> | <bit>
+<bit>:ZeroBit ::= ZERO
+<bit>:OneBit ::= ONE
 
 %
 # Semantic specification
-# Students will implement binary to decimal conversion here
+<binary>.val = <bits>.val
+<bits>.val = <bit>.val + 2 * <bits>[1].val
+<bit:ZeroBit>.val = 0
+<bit:OneBit>.val = 1
